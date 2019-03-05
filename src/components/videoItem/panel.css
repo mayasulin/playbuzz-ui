@@ -1,0 +1,25 @@
+.viewer-dim {
+  clear: both;
+}
+
+.viewer-color {
+  color: lightgray;
+}
+
+.video-titles {
+  font-weight: normal;
+  padding: 10px;
+}
+
+.title {
+  font-weight: normal;
+  display: inline;
+}
+
+.title-position-right {
+  float: right;
+}
+
+.title-position-left {
+  text-align: left;
+}
