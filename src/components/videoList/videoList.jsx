@@ -4,65 +4,41 @@ import ItemNotFound from "../itemNotFound/itemNotFound";
 import "./listStyle.css";
 
 class VideoList extends Component {
-  state = {
-    items: [
-      {
-        title: "How to prepare a great beer",
-        type: "video",
-        source: "facebook",
-        videoId: "1052114818157758",
-        views: 4569654
-      },
-      {
-        type: "video",
-        source: "url",
-        url: "http://cdn.playbuzz.com/content/feed/video-1.mp4",
-        views: 8820
-      },
-      {
-        title: "Be a winner!",
-        type: "video",
-        source: "youtube",
-        views: 12451409
-      },
-      {
-        title: "The Killers - The Man (Official Music Video)",
-        type: "video",
-        source: "youtube",
-        videoId: "w3xcybdis1k",
-        views: 25560867
-      },
-      {
-        title: "A funny dog barking",
-        type: "video",
-        source: "youtube",
-        videoId: "MveqXxB12YA",
-        views: 4287171
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: [
+        {
+          title: "How to prepare a great beer",
+          type: "video",
+          source: "facebook",
+          videoId: "1052114818157758",
+          views: 4569654
+        }
+      ],
+      expectedKeys: ["title", "views", "videoId"],
+      urlExtensions: {
+        facebook: "https://www.facebook.com/facebook/videos/",
+        youtube: "https://www.youtube.com/embed/",
+        itemNotFound: "../../img/video404.gif"
       }
-    ],
-    expectedKeys: ["title", "views", "videoId"],
-    urlExtensions: {
-      facebook: "https://www.facebook.com/facebook/videos/",
-      youtube: "https://www.youtube.com/embed/",
-      itemNotFound: "../../img/video404.gif"
-    }
-  };
+    };
+  }
+
   render() {
     return (
       <ul className="video-list">
-        {this.mapArray().map((value, i) => {
-          let a = this.buildDom(value, i);
-          console.log(a);
+        {this.mapArrayToDom().map((value, i) => {
           return this.buildDom(value, i);
         })}
       </ul>
     );
   }
 
-  mapArray() {
+  mapArrayToDom() {
     const { urlExtensions } = this.state;
     const self = this;
-    return this.state.items.map(function(value, index) {
+    return this.props.items.map(function(value, index) {
       if (!self.checkItemKeys(Object.keys(value))) {
         return {
           url: urlExtensions["itemNotFound"],
